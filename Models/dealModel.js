@@ -15,7 +15,7 @@ const dealSchema = new mongoose.Schema(
     // 👇 NEW FIELD
     dealSection: {
       type: String,
-      enum: ["1st Section", "2nd Section", "3rd Section", "4th Section"],
+      enum: ["1st Section", "2nd Section", "3rd Section", "4th Section","None"],
       required: true,
     },
   },

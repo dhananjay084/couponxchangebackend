@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import dealRoutes from "./Routes/dealRoutes.js";
 import storeRoutes from "./Routes/storeRoutes.js";
 import categoryRoutes from "./Routes/categoryRoutes.js";
+import uploadRoutes from "./Routes/uploadRoutes.js";
 
 // import userRoutes from "./routes/userRoutes";
 
@@ -21,6 +22,7 @@ app.use(json());
 app.use("/api/deals", dealRoutes);
 app.use("/api/stores", storeRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/upload", uploadRoutes); // ✅ new route
 
 
 const PORT = process.env.PORT || 5000;
