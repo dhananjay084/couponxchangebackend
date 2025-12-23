@@ -4,6 +4,7 @@ import {
   getStores,
   updateStore,
   deleteStore,
+  getStoreById
 } from "../Controllers/storeController.js";
 
 const router = express.Router();
@@ -13,6 +14,7 @@ router.route("/")
   .get(getStores);
 
 router.route("/:id")
+.get(getStoreById) // Add this line
   .put(updateStore)
   .delete(deleteStore);
 
