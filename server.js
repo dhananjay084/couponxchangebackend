@@ -7,11 +7,18 @@ import storeRoutes from "./Routes/storeRoutes.js";
 import categoryRoutes from "./Routes/categoryRoutes.js";
 import uploadRoutes from "./Routes/uploadRoutes.js";
 import blogRoutes from "./Routes/blogRoutes.js"; // ✅ Add blog routes
+import authRoutes from "./Routes/authRoutes.js";
+import couponSubmissionRoutes from "./Routes/couponSubmissionRoutes.js";
+import homepageConfigRoutes from "./Routes/homepageConfigRoutes.js";
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { ensureAdminUser } from "./utils/seedAdmin.js";
 
 config();
 connectDB();
+ensureAdminUser().catch((error) => {
+  console.error("Failed to ensure admin user:", error.message);
+});
 
 const app = express();
 
@@ -32,13 +39,16 @@ app.use("/api/stores", storeRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/blogs", blogRoutes); // ✅ Add blog routes
+app.use("/api/auth", authRoutes);
+app.use("/api/coupon-submissions", couponSubmissionRoutes);
+app.use("/api/homepage-config", homepageConfigRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ 
     success: true, 
     message: "API is running", 
-    services: ["deals", "stores", "categories", "upload", "blogs"] 
+    services: ["deals", "stores", "categories", "upload", "blogs", "auth", "coupon-submissions", "homepage-config"] 
   });
 });
 

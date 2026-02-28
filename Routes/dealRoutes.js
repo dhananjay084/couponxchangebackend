@@ -6,13 +6,14 @@ import {
   updateDeal,
   deleteDeal,
 } from "../Controllers/dealController.js";
+import { protect, requireAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", createDeal);
 router.get("/", getDeals);
 router.get("/:id", getDealById);
-router.put("/:id", updateDeal);
-router.delete("/:id", deleteDeal);
+router.post("/", protect, requireAdmin, createDeal);
+router.put("/:id", protect, requireAdmin, updateDeal);
+router.delete("/:id", protect, requireAdmin, deleteDeal);
 
 export default router;
